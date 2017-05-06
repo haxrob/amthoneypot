@@ -5,4 +5,4 @@ Honeypot for Intel's AMT Firmware Vulnerability CVE-2017-5689
 - [ ] Make RFC2069 compliant
 - [ ] Add templating to make content dynamic / random
 - [ ] Add error checking
-- [ ] Add method to give attacker RCE?
+- [ ] Add some form of RCE?
