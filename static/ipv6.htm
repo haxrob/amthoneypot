@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" >
+<html><head><link rel="stylesheet" href="styles.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Intel&reg; Active Management Technology</title></head>
+<body>
+<table class=header>
+<tr>
+         <td valign=top nowrap="nowrap">
+<p class=top1>Intel<font class=r><sup>&reg;</sup></font> Active Management Technology</p>
+<p class=top2><b>Computer:</b> COMP523444</p>
+         </td>
+<td valign=top><img src="logo.gif" align="right" alt="Intel">
+         </td>
+</tr>
+   </table>
+
+<table class=spread cellspacing=0>
+<tr>
+<td class=navbar>
+<br>
+<p class=nav1><A href="index.htm">System Status</A></p>
+ 
+<p class=nav1>Hardware Information</p>
+<p class=nav2>
+<A href="hw-sys.htm">System</A>
+<br><A href="hw-proc.htm">Processor</A>
+<br><A href="hw-mem.htm">Memory</A>
+<br><A href="hw-disk.htm">Disk</A>
+<br><A href="hw-batt.htm">Battery</A></p>
+<p class=nav1><A href="events.htm">Event Log</A></p>
+<p class=nav1><A href="power.htm">Power Policies</A></p>
+<p class=nav1><A href="ip.htm">Network Settings</A></p>
+<p class=nav1><A href="wlan.htm">Wireless Settings</A></p>
+<p class=nav1><A href="ipv6.htm">IPv6 Network Settings</A></p>
+<p class=nav1><A href="fqdn.htm">System Name Settings</A></p>
+<p class=nav1><a href="acl.htm">User Accounts</A></p>
+</td>
+<td class=maincell>
+
+<h1>IPv6 Network Settings</h1>
+<P></p>
+<FORM name="Ipv6Form" METHOD=POST ACTION="/ipv6form">
+<INPUT TYPE=hidden NAME="t" value="/">
+<table class=log border=0 cellpadding=0 cellspacing=0 width=480>
+<tr class=r1>
+<td class=nw width="38%"></td>
+<td class=ne>&nbsp;</td>
+</tr>
+<tr class=r1>
+<td colspan=2><p> Configure the managed device network settings for this computer.</p></td>
+</tr>
+<tr class=r1><td colspan=2 height=6></td></tr>
+<tr><td></td></tr>
+<tr class=r1>
+<td colspan=2>
+<p>TCP/IPV6 settings for wired connection</p>
+<p><input type=checkbox NAME="Ipv6Enabled"  onclick="disable_enable_all(this.form)">Enable IPv6</p>
+<p>TCP/IPV6 alternate static configuration</p>
+</td>
+</tr>
+<tr class=r1>
+<td height=28>
+<p class=in>IPV6 address:</p>
+</td>
+<td><input type=text NAME="Ipv6Address" size=25 maxlength=40 VALUE=""></td>
+</tr>
+<tr class=r1>
+<td height=28>
+<p class=in>Gateway address:</p>
+</td>
+<td><input type=text NAME="DefaultGatway" size=25 maxlength=40 VALUE=""></td>
+</tr>
+<tr class=r1>
+<td height=28><p class=in>Preferred DNS address:</p></td>
+<td><input type=text NAME="DNSServer" size=25 maxlength=40 VALUE=""></td>
+</tr>
+<tr class=r1>
+<td height=28><p class=in>Alternate DNS address:</p></td>
+<td><input type=text NAME="AlternativeDns" size=25 maxlength=40 VALUE="">
+</tr>
+<tr class=r1><td colspan=2 height=6></td></tr>
+<tr><td></td></tr>
+<tr class=r1>
+<td colspan=2>
+<p>TCP/IPV6 settings for wireless connection</p>
+<p><input type=checkbox NAME="Ipv6WirelessEnabled" >Enable IPv6</p>
+</td>
+</tr>
+<tr class=r1><td colspan=2 height=6></td></tr>
+<tr><td></td></tr>
+<tr class=r1>
+<td valign=bottom>
+<h2><input type=submit value="   Submit   "></h2>
+</td>
+<td></td>
+</tr>
+<tr class=r1>
+<td class=sw></td>
+<td class=se></td>
+</tr>
+</table>
+</FORM>
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+function dis(Active)
+{
+  var tcolor;
+ 
+ if(!Ipv6Form.Ipv6Enabled.checked) 
+ {
+    Active==false;
+ }
+ if (Active==true) 
+ { 
+    tcolor = "#C0C0C0";
+ }
+ else {
+  tcolor = "#ffffff";
+ }
+
+ Ipv6Form.Ipv6Address.disabled=Active
+ Ipv6Form.Ipv6Address.style.backgroundColor = tcolor
+ Ipv6Form.DefaultGatway.disabled=Active
+ Ipv6Form.DefaultGatway.style.backgroundColor = tcolor
+ Ipv6Form.DNSServer.disabled=Active
+ Ipv6Form.DNSServer.style.backgroundColor = tcolor 
+ Ipv6Form.AlternativeDns.disabled=Active
+ Ipv6Form.AlternativeDns.style.backgroundColor = tcolor
+}
+
+function disable_enable_all(ipv6_form)
+{
+  var tcolor;
+  var Active;
+ 
+ if (ipv6_form.Ipv6Enabled.checked) 
+ { 
+  Active = false;
+  tcolor = "#ffffff";
+ }
+ else {
+    Active = true;
+    tcolor = "#C0C0C0";
+ }
+}
+
+</SCRIPT>
+</td>
+		</tr>
+	</table>
+</body></html>

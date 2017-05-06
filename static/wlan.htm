@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" >
+<html><head><link rel="stylesheet" href="styles.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Intel&reg; Active Management Technology</title></head>
+<body>
+<table class=header>
+<tr>
+         <td valign=top nowrap="nowrap">
+<p class=top1>Intel<font class=r><sup>&reg;</sup></font> Active Management Technology</p>
+<p class=top2><b>Computer:</b> COMP523444</p>
+         </td>
+<td valign=top><img src="logo.gif" align="right" alt="Intel">
+         </td>
+</tr>
+   </table>
+
+<table class=spread cellspacing=0>
+<tr>
+<td class=navbar>
+<br>
+<p class=nav1><A href="index.htm">System Status</A></p>
+ 
+<p class=nav1>Hardware Information</p>
+<p class=nav2>
+<A href="hw-sys.htm">System</A>
+<br><A href="hw-proc.htm">Processor</A>
+<br><A href="hw-mem.htm">Memory</A>
+<br><A href="hw-disk.htm">Disk</A>
+<br><A href="hw-batt.htm">Battery</A></p>
+<p class=nav1><A href="events.htm">Event Log</A></p>
+<p class=nav1><A href="power.htm">Power Policies</A></p>
+<p class=nav1><A href="ip.htm">Network Settings</A></p>
+<p class=nav1><A href="wlan.htm">Wireless Settings</A></p>
+<p class=nav1><A href="ipv6.htm">IPv6 Network Settings</A></p>
+<p class=nav1><A href="fqdn.htm">System Name Settings</A></p>
+<p class=nav1><a href="acl.htm">User Accounts</A></p>
+</td>
+<td class=maincell>
+
+<h1>Wireless Settings</h1>
+
+<P></p>
+<form action="/togglewlan" method=post>
+<table class=log border=0 cellpadding=0 cellspacing=0 width=480>
+<tr class=r1>
+<td class=nw width=160></td>
+<td width=72></td>
+<td class=ne>&nbsp;</td>
+</tr>
+<tr class=r1>
+<td><p>Band mode capabilities</p></td>
+<td><p>A B G N</p></td>
+<td></td>
+</tr>
+<tr class=r1>
+<td><p>Radio state</p></td>
+<td><p>Unknown</p></td>
+<td><br></td>
+</tr>
+<tr class=r1><td></td></tr>
+<tr class=r1>
+<td colspan=2>
+<INPUT TYPE=hidden NAME="t" value="">
+<p></p>
+&nbsp;&nbsp;Wireless Management:
+<p class=in>
+<input type=radio value="0_disabled" name="WlanToggleOption" checked="checked">Disabled<br>
+<input type=radio value="1_s0" name="WlanToggleOption" >Enabled in S0<br>
+<input type=radio value="2_sx_s0" name="WlanToggleOption" >Enabled in S0, Sx/AC<br>
+<br/>
+</p>
+</td>
+<td></td>
+</tr>
+<tr class=r1><td></td></tr>
+<tr class=r1>
+<td colSpan=2><h2><input type=submit value="Submit" name="WlanToggleSubmit" /></h2></td><td></td>
+</tr>
+<tr class=r1>
+<td class=sw></td>
+<td></td>
+<td class=se>
+</tr>
+</table>
+</form>
+
+<FORM ACTION="/wlanform" METHOD=POST>
+<INPUT TYPE=hidden NAME="t" value="">
+<table class=log border=0 cellpadding=0 cellspacing=0 width=480>
+<tr class=r0>
+<td>
+<h2>Profiles</h2>
+</td>
+<td></td>
+</tr>
+<tr class=r1>
+<td class=nw></td>
+<td class=ne>&nbsp;</td>
+</tr>
+<tr class=r1>
+<td>
+<p>Connect to wireless networks in the order listed below. </p>
+<p class=in>Profile name / Network name (SSID):<br></p>
+<table class="log in" border=0 cellpadding=0 cellspacing=0>
+<tr class=r1>
+<td>
+<select name="WlanSelect" size=5>
+</select> 
+</td>
+<td>
+<p><input type=submit name="WlanSubmit" value=" Move Up "></p>
+<p><input type=submit name="WlanSubmit" value="Move Down"></p>
+</td>
+</tr>
+</table>
+<br>&nbsp;
+</td>
+<td></td>
+</tr>
+<tr><td></td></tr>
+<tr class=r1>
+<td>
+<h2><input type=submit name="WlanSubmit" value="  New...  ">
+<input type=submit name="WlanSubmit" value="Change...">
+<input type=submit name="WlanSubmit" value=" Remove ">
+</h2>
+</td>
+<td></td>
+</tr>
+<tr class=r1>
+<td class=sw></td>
+<td class=se></td>
+</tr>
+</table>
+</form>
+</td>
+		</tr>
+	</table>
+</body></html>

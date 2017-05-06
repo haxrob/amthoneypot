@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" >
+<html><head><link rel="stylesheet" href="styles.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Intel&reg; Active Management Technology</title></head>
+<body>
+<table class=header>
+<tr>
+         <td valign=top nowrap="nowrap">
+<p class=top1>Intel<font class=r><sup>&reg;</sup></font> Active Management Technology</p>
+<p class=top2><b>Computer:</b> COMP523444</p>
+         </td>
+<td valign=top><img src="logo.gif" align="right" alt="Intel">
+         </td>
+</tr>
+   </table>
+
+<table class=spread cellspacing=0>
+<tr>
+<td class=navbar>
+<br>
+<p class=nav1><A href="index.htm">System Status</A></p>
+ 
+<p class=nav1>Hardware Information</p>
+<p class=nav2>
+<A href="hw-sys.htm">System</A>
+<br><A href="hw-proc.htm">Processor</A>
+<br><A href="hw-mem.htm">Memory</A>
+<br><A href="hw-disk.htm">Disk</A>
+<br><A href="hw-batt.htm">Battery</A></p>
+<p class=nav1><A href="events.htm">Event Log</A></p>
+<p class=nav1><A href="power.htm">Power Policies</A></p>
+<p class=nav1><A href="ip.htm">Network Settings</A></p>
+<p class=nav1><A href="wlan.htm">Wireless Settings</A></p>
+<p class=nav1><A href="ipv6.htm">IPv6 Network Settings</A></p>
+<p class=nav1><A href="fqdn.htm">System Name Settings</A></p>
+<p class=nav1><a href="acl.htm">User Accounts</A></p>
+</td>
+<td class=maincell>
+
+<h1>User Accounts</h1>
+<p></p>
+<FORM METHOD=POST ACTION="/user.htm">
+<table class=log border=0 cellpadding=0 cellspacing=0 width=480>
+<tr>
+<td class=nw width="98%"></td>
+<td class=ne>&nbsp;</td>
+</tr>
+<tr class=r1>
+<td>
+<INPUT TYPE=hidden NAME="t" value="">
+<p>Manage the managed device user accounts for this computer.</p>
+<p>User names:</p>
+<SELECT NAME="UserName" SIZE=7 style="margin: 10px;">
+</SELECT>
+<br>&nbsp;
+</td>
+<td></td>
+</tr>
+<tr>
+<td class=r1>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<p>
+<INPUT TYPE=SUBMIT NAME=UserSubmit VALUE="    New...  ">
+<INPUT TYPE=SUBMIT NAME=UserSubmit VALUE="Change...">
+<INPUT TYPE=SUBMIT NAME=UserSubmit VALUE=" Remove ">
+<INPUT TYPE=SUBMIT NAME=UserSubmit VALUE="Change Admin...">
+</p>
+</td>
+<td></td>
+</tr>
+<tr>
+<td class=sw></td>
+<td class=se></td>
+</tr>
+</table>
+</form>
+<FORM METHOD=POST ACTION="/anon.htm">
+<table class=log border=0 cellpadding=0 cellspacing=0 width=480>
+<tr class=r0>
+<td><h2>Anonymous access</h2></td>
+<td>
+<INPUT TYPE=hidden NAME="t" value="">
+</td>
+</tr>
+<tr>
+<td class=nw width="98%"></td>
+<td class=ne></td>
+</tr>
+<tr>
+<td>
+<p>Configure access for the managed device on this computer.</p>
+<p><input type=checkbox NAME="AnonEac" CHECKED>Allow anonymous access for endpoint access control</p>
+</td>
+<td></td>
+</tr>
+<tr>
+<td class=r1 colspan=2 height=6>&nbsp;</td>
+</tr>
+<tr><td></td></tr>
+<tr>
+<td>
+<p><INPUT TYPE=SUBMIT NAME="Submit" value="Submit"></p>
+</td>
+<td></td>
+</tr>
+<tr>
+<td class=sw></td>
+<td class=se></td>
+</tr>
+</table>
+</form>
+</td>
+		</tr>
+	</table>
+</body></html>
