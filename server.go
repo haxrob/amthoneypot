@@ -23,11 +23,11 @@ func whiteList(url string) bool {
 	return false
 }
 
-
 func handler(w http.ResponseWriter, r *http.Request) {
 	
-	w.Header().Set("Cache-Control", "no-cache")
-	w.Header().Set("Server", "Intel(R) Active Management Technology 9.1.34")
+	// Only set no cache when testing locally
+	//w.Header().Set("Cache-Control", "no-cache")
+	w.Header().Set("Server", "Intel(R) Active Management Technology 9.1.33")
 
 	p := r.URL.Path
 
@@ -35,7 +35,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if p == "/" {
 		http.Redirect(w, r, "logon.htm", 301)
 	}
-
+	
+	// trailing filename in URL
 	content := p[1:]
 
 	// don't do auth for some resources
@@ -49,16 +50,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func parseAuthHeader(r *http.Request) map[string]string {
+	
 	auth := make(map[string]string)
-
 	h := r.Header.Get("Authorization")
 
 	if len(h) > 0 {
-		
-		
 		s := strings.Split(h, ",")
 		// neaten things up
-
 		for _, v := range(s) {
 			z := strings.Split(v, "=")
 			z0 := strings.Trim(z[0], "\" ")
@@ -66,7 +64,6 @@ func parseAuthHeader(r *http.Request) map[string]string {
 			auth[z0] = z1
 		}
 	}
-
 	return auth
 }
 
@@ -79,7 +76,8 @@ func doAuth(w http.ResponseWriter, r *http.Request) bool {
 		return true
 	}
 
-	digest := "C90A0000000000000000000000000000"
+	// appears to be static?
+	digest := "C90B0000000000000000000000000000"
 
 	b := make([]byte, 32)
 	rand.Read(b)
@@ -96,6 +94,8 @@ func doAuth(w http.ResponseWriter, r *http.Request) bool {
 
 }
 
+// Log address, http method, URL, username and if the response header item was set to null which would indicate 
+// the known vulnerability was being used
 func Log(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		authHeader := parseAuthHeader(r)
@@ -108,7 +108,6 @@ func Log(handler http.Handler) http.Handler {
 }
 
 func main() {
-
     http.HandleFunc("/", handler) 
     http.ListenAndServe(":16992", Log(http.DefaultServeMux))
 } 
