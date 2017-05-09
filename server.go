@@ -43,11 +43,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	// don't do auth for some resources
 	
-	/*if whiteList(p) == false {
+	if whiteList(p) == false {
 		if doAuth(w, r) == false {
 			content = "invalid.htm"
 		}
-	} */
+	} 
 	
 	http.ServeFile(w, r, "static/" + content)
 }
