@@ -3,9 +3,12 @@ package main
 import (
     "fmt"
     "net/http"
+    "net/http/httputil"
     "log"
     "strings"
     "crypto/rand"
+    "os"
+    "time"
 )
 
 // no authentication for the following requests 
@@ -23,11 +26,11 @@ func whiteList(url string) bool {
 	return false
 }
 
+
 func handler(w http.ResponseWriter, r *http.Request) {
 	
-	// Only set no cache when testing locally
-	//w.Header().Set("Cache-Control", "no-cache")
-	w.Header().Set("Server", "Intel(R) Active Management Technology 9.1.33")
+	w.Header().Set("Cache-Control", "no-cache")
+	w.Header().Set("Server", "Intel(R) Active Management Technology 9.1.34")
 
 	p := r.URL.Path
 
@@ -35,28 +38,31 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if p == "/" {
 		http.Redirect(w, r, "logon.htm", 301)
 	}
-	
-	// trailing filename in URL
+
 	content := p[1:]
 
 	// don't do auth for some resources
-	if whiteList(p) == false {
+	
+	/*if whiteList(p) == false {
 		if doAuth(w, r) == false {
 			content = "invalid.htm"
 		}
-	} 
+	} */
 	
 	http.ServeFile(w, r, "static/" + content)
 }
 
 func parseAuthHeader(r *http.Request) map[string]string {
-	
 	auth := make(map[string]string)
+
 	h := r.Header.Get("Authorization")
 
 	if len(h) > 0 {
+		
+		
 		s := strings.Split(h, ",")
 		// neaten things up
+
 		for _, v := range(s) {
 			z := strings.Split(v, "=")
 			z0 := strings.Trim(z[0], "\" ")
@@ -64,6 +70,7 @@ func parseAuthHeader(r *http.Request) map[string]string {
 			auth[z0] = z1
 		}
 	}
+
 	return auth
 }
 
@@ -76,8 +83,7 @@ func doAuth(w http.ResponseWriter, r *http.Request) bool {
 		return true
 	}
 
-	// appears to be static?
-	digest := "C90B0000000000000000000000000000"
+	digest := "C90A0000000000000000000000000000"
 
 	b := make([]byte, 32)
 	rand.Read(b)
@@ -94,20 +100,44 @@ func doAuth(w http.ResponseWriter, r *http.Request) bool {
 
 }
 
-// Log address, http method, URL, username and if the response header item was set to null which would indicate 
-// the known vulnerability was being used
-func Log(handler http.Handler) http.Handler {
+func Log(handler http.Handler, logFile string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		authHeader := parseAuthHeader(r)
 		if authHeader["response"] == "" {
 			authHeader["response"] = "empty"
 		}
-		log.Println(r.RemoteAddr, r.Method, r.URL, authHeader["Digest username"], authHeader["response"])
+		log.Println(r.RemoteAddr, r.Method, r.URL)
+
+		dump, err := httputil.DumpRequest(r, true)
+
+		if err == nil {
+			t := time.Now().Format(time.RFC850)
+			entry := fmt.Sprintf("%s\n%s", t, dump)
+			f, err := os.OpenFile(logFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+			if err != nil {
+				log.Println("error ", err)
+			}
+			defer f.Close()
+
+			_, err = f.WriteString(entry)
+			if err != nil {
+				log.Println("error writing: ", err)
+			}
+
+		}
+
 		handler.ServeHTTP(w, r)
 	})
 }
 
 func main() {
+	if len(os.Args) != 2 {
+		fmt.Println("usage: ./server <log file>")
+		os.Exit(1)
+	}
+
+	logFile := os.Args[1]
+
     http.HandleFunc("/", handler) 
-    http.ListenAndServe(":16992", Log(http.DefaultServeMux))
+    http.ListenAndServe(":16992", Log(http.DefaultServeMux, logFile))
 } 
