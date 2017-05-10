@@ -83,7 +83,7 @@ func doAuth(w http.ResponseWriter, r *http.Request) bool {
 		return true
 	}
 
-	digest := "C90A0000000000000000000000000000"
+	digest := "C10000000000000000000000000000"
 
 	b := make([]byte, 32)
 	rand.Read(b)
@@ -102,17 +102,18 @@ func doAuth(w http.ResponseWriter, r *http.Request) bool {
 
 func Log(handler http.Handler, logFile string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		authHeader := parseAuthHeader(r)
-		if authHeader["response"] == "" {
-			authHeader["response"] = "empty"
-		}
-		log.Println(r.RemoteAddr, r.Method, r.URL)
 
-		dump, err := httputil.DumpRequest(r, true)
+		//log.Println(r.RemoteAddr, r.Method, r.URL)
+		rAddress := "Remote:" + r.RemoteAddr
+
+		t := time.Now().Format(time.RFC850)
+
+		dump, err := httputil.DumpRequest(r, false)
 
 		if err == nil {
-			t := time.Now().Format(time.RFC850)
-			entry := fmt.Sprintf("%s\n%s", t, dump)
+			
+			entry := fmt.Sprintf("%s\n%s\n%s", t, rAddress, dump)
+
 			f, err := os.OpenFile(logFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 			if err != nil {
 				log.Println("error ", err)
